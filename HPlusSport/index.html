@@ -11,6 +11,26 @@
         $("#products h2.product-name[data-type=vitamin]").css("background", "green");
         $("#products h2.product-name[data-type=proteinbar]").css("background", "yellow");
         $("#products h2.product-name[data-type=mineralwater]").css("background", "blue");
+        document.querySelector("#vitaminSelect").addEventListener('change', function (evt) {
+            updateProductView("vitamins", evt.target.checked);
+        });
+
+        function updateProductView(categoryName, bVisible) {
+            let dataSelectorVal = "";
+            switch (categoryName) {
+              case "vitamins":
+                dataSelectorVal = "h2[data-type='vitamin']";
+                break;
+              case "mineralwater":
+                dataSelectorVal = "h2[data-type='mineralwater']";
+                break;
+              case "proteinbar":
+                dataSelectorVal = "h2[data-type='proteinbar']";
+                break;
+            }
+
+            $(".product-item").has(dataSelectorVal).css('display', bVisible ? "" : "none");
+        }
     })
   </script>
 </head>
@@ -54,6 +74,19 @@
     <h2 class="headline">Products</h2>
     <p>H+ Sport is <em>dedicated to creating</em> eco-friendly, high-quality, nutrient-rich, nutritional products that <em>enhance active lifestyles</em>. We <a href="#guarantee">guarantee</a> it. Take a look at some of our products.</p>
   </div><!-- container -->
+  <div id="productControls">
+    <form>
+      <div>
+        <span>Show: </span>
+        <input type="checkbox" checked="checked" id="vitaminSelect"/>
+        <label for="vitaminSelect">Vitamins</label>
+        <input type="checkbox" checked="checked" id="waterSelect">
+        <label for="waterSelect">Mineral Water</label>
+        <input type="checkbox" checked="checked" id="barsSelect">
+        <label for="barsSelect">Protein Bars</label>
+      </div>
+    </form>
+  </div>
   <ul class="product-list">
     <li class="product-item" data-prod_id="V-A1037">
         <img class="product-image" src="images/products/vitamin-a.jpg" alt="Vitamin A - Product Photo">
