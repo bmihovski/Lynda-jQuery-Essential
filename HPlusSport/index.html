@@ -15,6 +15,14 @@
             updateProductView("vitamins", evt.target.checked);
         });
 
+      document.querySelector("#waterSelect").addEventListener('change', function (evt) {
+        updateProductView("mineralwater", evt.target.checked);
+      });
+
+      document.querySelector("#barsSelect").addEventListener('change', function (evt) {
+        updateProductView("proteinbar", evt.target.checked);
+      });
+
         function updateProductView(categoryName, bVisible) {
             let dataSelectorVal = "";
             switch (categoryName) {
@@ -185,6 +193,7 @@
         </div>
         <p class="card-text">Henry Twill Jr. is the <em>founder</em> and CEO of H+ Sports. Previously he was an <em>athletic trainer</em> working with several top athletes, making sure that they had the direction and proper coaching to keep them at the <em>top of their game</em>. Henry’s passion for finding natural alternatives led him to developing H+ Sport Multivitamins. The supplements <em>became a success</em> with his clients and led to the creation of H+ Sports.</p>
       </div><!-- person-card -->
+    </div>
 
       <div class="person-card">
         <img src="images/employees/JessicaNewton.jpg" alt="JessicaNewton Photo">
