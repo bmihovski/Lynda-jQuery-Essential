@@ -5,6 +5,34 @@
   <title>HPlus Sport</title>
   <link rel="stylesheet" href="css/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../jquery-3.4.1.js"></script>
+    <script>
+        $(function () {
+            // extract the query string params
+            let paramLoc = window.location.href.indexOf("?");
+            let paramStr = window.location.href.slice(paramLoc + 1);
+            let prodName = "";
+            let prodID = "";
+            let paramNameStr = paramStr.indexOf("prodName=") + 9;
+            for (let j = paramNameStr; j < paramStr.length; j++) {
+                if (paramStr.charAt(j) == "&") {
+                    break;
+                }
+                prodName += paramStr.charAt(j);
+            }
+            let paramIdStr = paramStr.indexOf("prodID=") + 7;
+            for (let j = paramStr; j < paramStr.length; j++) {
+                if (paramStr.charAt(j) == "&") {
+                    break;
+                }
+                prodID += paramStr.charAt(j);
+            }
+            prodName = decodeURIComponent(prodName);
+            prodID = decodeURIComponent(prodID);
+            // set the product name in the proper placeholder
+            $("#productName").text(prodName);
+        })
+    </script>
 </head>
 <body>
 
