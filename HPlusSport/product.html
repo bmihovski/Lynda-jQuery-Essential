@@ -9,20 +9,20 @@
     <script>
         $(function () {
             // extract the query string params
-            let paramLoc = window.location.href.indexOf("?");
-            let paramStr = window.location.href.slice(paramLoc + 1);
-            let prodName = "";
-            let prodID = "";
-            let paramNameStr = paramStr.indexOf("prodName=") + 9;
-            for (let j = paramNameStr; j < paramStr.length; j++) {
-                if (paramStr.charAt(j) == "&") {
+            var paramLoc = window.location.href.indexOf("?");
+            var paramStr = window.location.href.slice(paramLoc + 1);
+            var prodName = "";
+            var prodID = "";
+            var paramNameStr = paramStr.indexOf("prodName=") + 9;
+            for (var j = paramNameStr; j < paramStr.length; j++) {
+                if (paramStr.charAt(j) === "&") {
                     break;
                 }
                 prodName += paramStr.charAt(j);
             }
-            let paramIdStr = paramStr.indexOf("prodID=") + 7;
-            for (let j = paramStr; j < paramStr.length; j++) {
-                if (paramStr.charAt(j) == "&") {
+            var paramIdStr = paramStr.indexOf("prodID=") + 7;
+            for (var j = paramIdStr; j < paramStr.length; j++) {
+                if (paramStr.charAt(j) === "&") {
                     break;
                 }
                 prodID += paramStr.charAt(j);
@@ -31,7 +31,18 @@
             prodID = decodeURIComponent(prodID);
             // set the product name in the proper placeholder
             $("#productName").text(prodName);
-        })
+            $.getJSON("product-data.json")
+                .done(function (result) {
+                $.each(result.products, function (i, item) {
+                    if (item.prod_id === prodID) {
+                        $("#productStock").text(item.in_stock);
+                        $("#productPrice").text(item.retail_price);
+                        $("#productDesc").text(item.description);
+                        return false;
+                    }
+                })
+            });
+        });
     </script>
 </head>
 <body>
